@@ -94,7 +94,7 @@ def thumbnail (picture):
         target_x += 1
     canvas.save("temp.png")
 
-
+#To use for the combobox in the GUI
 def image_functions(im):
     if style == "None":
         none(im)
