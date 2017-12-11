@@ -138,7 +138,7 @@ class Window(QWidget):
         self.add_img_btn.clicked.connect(self.add_img_btn_on_click)
         self.reset_btn.clicked.connect(self.reset_btn_on_click)
         self.create_vid_btn.clicked.connect(self.create_vid_btn_on_click)
-        self.add_audio_butn.clicked.connect(self.add_audio_btn_on_click)
+        self.add_audio_btn.clicked.connect(self.add_audio_btn_on_click)
 
         #Connecting Combo Boxes to sockets
         self.my_filter_list.currentIndexChanged.connect(self.apply_filter)
