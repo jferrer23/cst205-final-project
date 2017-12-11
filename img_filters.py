@@ -9,50 +9,50 @@ from PIL import Image, ImageFilter, ImageOps
 
 #no filter
 def none (picture):
-    picture.save("img1.png")
-    img = Image.open("img1.png")
+    picture.save("img_none.png")
+    img = Image.open("img_none.png")
     img.resize((600,600)).save("img_none.png")
 
 #posterize image
 def posterize(picture):
     picture = ImageOps.posterize(picture, 1)
-    picture.save("img2.png")
-    img = Image.open("img2.png")
+    picture.save("img_posterize.png")
+    img = Image.open("img_posterize.png")
     img.resize((600,600)).save("img_posterize.png")
 
 def solarize(picture):
     picture = ImageOps.solarize(picture)
-    picture.save("img3.png")
-    img = Image.open("img3.png")
+    picture.save("img_solarize.png")
+    img = Image.open("img_solarize.png")
     img.resize((600,600)).save("img_solarize.png")
 
 #sharpen image
 def sharpen(picture):
     picture = picture.filter(ImageFilter.EDGE_ENHANCE)
-    picture.save("img4.png")
-    img = Image.open("img4.png")
+    picture.save("img_sharpen.png")
+    img = Image.open("img_sharpen.png")
     img.resize((600,600)).save("img_sharpen.png")
     
 
 #convert to black & white
 def black_white(picture):
     picture = picture.convert("1")
-    picture.save("img5.png")
-    img = Image.open("img5.png")
+    picture.save("img_gray.png")
+    img = Image.open("img_gray.png")
     img.resize((600,600)).save("img_gray.png")
 
 #blur image
 def blur(picture):
     picture = picture.filter(ImageFilter.BLUR)
-    picture.save("img6.png")
-    img = Image.open("img6.png")
+    picture.save("img_blur.png")
+    img = Image.open("img_blur.png")
     img.resize((600,600)).save("img_blur.png")
 
 #negative image
 def negative(picture):
     picture = ImageOps.invert(picture)
-    picture.save("img7.png")
-    img = Image.open("img7.png")
+    picture.save("img_negative.png")
+    img = Image.open("img_negative.png")
     img.resize((600,600)).save("img_negative.png")
 
 #temporary for sepia
@@ -96,8 +96,8 @@ def sepia(picture):
             blue_val = int(p[2] * 0.5)
         temp_list.append((red_val, green_val, blue_val))
     picture.putdata(temp_list)
-    picture.save("img8.png")
-    img = Image.open("img8.png")
+    picture.save("img_grayscale.png")
+    img = Image.open("img_grayscale.png")
     img.resize((600,600)).save("img_grayscale.png")
 
 #Thumbnail
@@ -111,8 +111,8 @@ def thumbnail (picture):
             canvas.putpixel((target_x, target_y), color)
             target_y += 1
         target_x += 1
-    canvas.save("img9.png")
-    img = Image.open("img9.png")
+    canvas.save("img_thumbnail.png")
+    img = Image.open("img_thumbnail.png")
     img.resize((600,600)).save("img_thumbnail.png")
 
 
