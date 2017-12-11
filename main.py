@@ -172,6 +172,7 @@ class Window(QWidget):
 
     @pyqtSlot()
     def apply_filter(self):
+        apply_filters(self.my_filter_list.currentText(), currentImage)
         return
 
 
