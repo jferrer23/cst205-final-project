@@ -3,6 +3,7 @@
 #Date: 12/10/2017
 #Title: Image Filters
 #Abstract: FIlters to be applied to the images selected by the user
+#GitHub Link: https://github.com/jferrer23/cst205-final-project
 
 from PIL import Image, ImageFilter, ImageOps
 
