@@ -1,9 +1,10 @@
-#Name: Manjit Gurcha
-#Filters for CST205 project
+#Author: Manjit Gurcha
+#Course: CST205
+#Date: 12/10/2017
+#Title: Image Filters
+#Abstract: FIlters to be applied to the images selected by the user
 
-from PIL import Image
-from PIL import ImageFilter
-from PIL import ImageOps
+from PIL import Image, ImageFilter, ImageOps
 
 #no filter
 def none (picture):
@@ -94,8 +95,9 @@ def thumbnail (picture):
         target_x += 1
     canvas.save("temp.png")
 
-
-def image_functions(im):
+#to use with combo box in gui
+def image_filters(style, imageUrl):
+    im = Image.open(imageUrl)
     if style == "None":
         none(im)
     if style == "Sharpen":
@@ -114,6 +116,3 @@ def image_functions(im):
         thumbnail(im)
     if style == "Sepia":
         sepia(im)
-#example to try
-# im = Image.open("Output.jpg")
-# negative(im)
