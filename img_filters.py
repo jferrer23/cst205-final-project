@@ -9,36 +9,36 @@ from PIL import Image, ImageFilter, ImageOps
 
 #no filter
 def none (picture):
-    picture.save("temp.png")
+    picture.save("img1.png")
 
 #posterize image
 def posterize(picture):
     picture = ImageOps.posterize(picture, 1)
-    picture.save("temp.png")
+    picture.save("img2.png")
 
 def solarize(picture):
     picture = ImageOps.solarize(picture)
-    picture.save("temp.png")
+    picture.save("img3.png")
 
 #sharpen image
 def sharpen(picture):
     picture = picture.filter(ImageFilter.EDGE_ENHANCE)
-    picture.save("temp.png")
+    picture.save("img4.png")
 
 #convert to black & white
 def black_white(picture):
     picture = picture.convert("1")
-    picture.save("temp.png")
+    picture.save("img5.png")
 
 #blur image
 def blur(picture):
     picture = picture.filter(ImageFilter.BLUR)
-    picture.save("temp.png")
+    picture.save("img6.png")
 
 #negative image
 def negative(picture):
     picture = ImageOps.invert(picture)
-    picture.save("temp.png")
+    picture.save("img7.png")
 
 #temporary for sepia
 def temp_grayscale(picture):
@@ -81,7 +81,7 @@ def sepia(picture):
             blue_val = int(p[2] * 0.5)
         temp_list.append((red_val, green_val, blue_val))
     picture.putdata(temp_list)
-    picture.save("temp.png")
+    picture.save("img8.png")
 
 #Thumbnail
 def thumbnail (picture):
@@ -94,26 +94,26 @@ def thumbnail (picture):
             canvas.putpixel((target_x, target_y), color)
             target_y += 1
         target_x += 1
-    canvas.save("temp.png")
+    canvas.save("img9.png")
 
 
 #to use with combo box in gui
 def apply_filters(style, image):
     if style == "None":
-        none(im)
+        none(image)
     if style == "Sharpen":
-        sharpen(im)
+        sharpen(image)
     if style == "Blur":
-        blue(im)
+        blue(image)
     if style == "Negative":
-        negative(im)
+        negative(image)
     if style == "Posterize":
-        posterize(im)
+        posterize(image)
     if style == "Black & White":
-        black_white(im)
+        black_white(image)
     if style == "Solarize":
-        solarize(im)
+        solarize(image)
     if style == "Thumbnail":
-        thumbnail(im)
+        thumbnail(image)
     if style == "Sepia":
-        sepia(im)
+        sepia(image)
