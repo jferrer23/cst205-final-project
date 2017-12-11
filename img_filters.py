@@ -11,27 +11,27 @@ from PIL import Image, ImageFilter, ImageOps
 def none (picture):
     picture.save("img1.png")
     img = Image.open("img1.png")
-    img.resize((600,600)).save("img1.png")
+    img.resize((600,600)).save("img_none.png")
 
 #posterize image
 def posterize(picture):
     picture = ImageOps.posterize(picture, 1)
     picture.save("img2.png")
     img = Image.open("img2.png")
-    img.resize((600,600)).save("img2.png")
+    img.resize((600,600)).save("img_posterize.png")
 
 def solarize(picture):
     picture = ImageOps.solarize(picture)
     picture.save("img3.png")
     img = Image.open("img3.png")
-    img.resize((600,600)).save("img3.png")
+    img.resize((600,600)).save("img_solarize.png")
 
 #sharpen image
 def sharpen(picture):
     picture = picture.filter(ImageFilter.EDGE_ENHANCE)
     picture.save("img4.png")
     img = Image.open("img4.png")
-    img.resize((600,600)).save("img4.png")
+    img.resize((600,600)).save("img_sharpen.png")
     
 
 #convert to black & white
@@ -39,21 +39,21 @@ def black_white(picture):
     picture = picture.convert("1")
     picture.save("img5.png")
     img = Image.open("img5.png")
-    img.resize((600,600)).save("img5.png")
+    img.resize((600,600)).save("img_gray.png")
 
 #blur image
 def blur(picture):
     picture = picture.filter(ImageFilter.BLUR)
     picture.save("img6.png")
     img = Image.open("img6.png")
-    img.resize((600,600)).save("img6.png")
+    img.resize((600,600)).save("img_blur.png")
 
 #negative image
 def negative(picture):
     picture = ImageOps.invert(picture)
     picture.save("img7.png")
     img = Image.open("img7.png")
-    img.resize((600,600)).save("img7.png")
+    img.resize((600,600)).save("img_negative.png")
 
 #temporary for sepia
 def temp_grayscale(picture):
@@ -98,7 +98,7 @@ def sepia(picture):
     picture.putdata(temp_list)
     picture.save("img8.png")
     img = Image.open("img8.png")
-    img.resize((600,600)).save("img8.png")
+    img.resize((600,600)).save("img_grayscale.png")
 
 #Thumbnail
 def thumbnail (picture):
@@ -113,7 +113,7 @@ def thumbnail (picture):
         target_x += 1
     canvas.save("img9.png")
     img = Image.open("img9.png")
-    img.resize((600,600)).save("img9.png")
+    img.resize((600,600)).save("img_thumbnail.png")
 
 
 #to use with combo box in gui
