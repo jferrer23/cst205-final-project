@@ -4,6 +4,7 @@
 #Date: 12/10/2017
 #Abstract: This is the main function file that creates the GUI
 #           and applies the functions we created.
+#GitHub Link: https://github.com/jferrer23/cst205-final-project
 
 import os
 from imagesearch import (getimage)
