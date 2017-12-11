@@ -34,7 +34,6 @@ my_list = ["None", "Sharpen", "Blur", "Negative", "Posterize", "Black & White",
            "Solarize", "Thumbnail", "Sepia"]
 
 image_list = []
-currentimage = None
 
 class Window(QWidget):
     def __init__(self):
