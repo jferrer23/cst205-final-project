@@ -26,9 +26,13 @@ music_list = {
     "Somewhere Over the Rainbow" : "rainbow.mp3"
 }
 
+
 #list of image filters for combobox
 my_list = ["None", "Sharpen", "Blur", "Negative", "Posterize", "Black & White",
-          "Solarize", "Thumbnail", "Sepia"]
+           "Solarize", "Thumbnail", "Sepia"]
+
+image_list = []
+currentimage = None
 
 class Window(QWidget):
     def __init__(self):
@@ -99,12 +103,30 @@ class Window(QWidget):
         audio_box_layout.addWidget(self.addsound)
         self.sound.setLayout(audio_box_layout)
 
+        #Video Creation layouts
+        video_box_layout = QVBoxLayout()
+        video_btns_layout = QHBoxLayout()
+
+        self.video_box = QWidget()
+        self.video_btns = QWidget()
+        self.video_create_label = QLabel("Create video using assets:")
+        self.reset_btn = QPushButton("Reset Assets", self)
+        self.create_vid_btn = QPushButton("Create Video", self)
+
+        video_btns_layout.addWidget(self.reset_btn)
+        video_btns_layout.addWidget(self.create_vid_btn)
+        self.video_btns.setLayout(video_btns_layout)
+        video_box_layout.addWidget(self.video_create_label)
+        video_box_layout.addWidget(self.video_btns)
+        self.video_box.setLayout(video_box_layout)
+
         # Main Box Layout
         mainLayout = QVBoxLayout()
         mainLayout.addWidget(self.title_label)
         mainLayout.addWidget(self.searcharea)
         mainLayout.addWidget(self.resultimage)
         mainLayout.addWidget(self.sound)
+        mainLayout.addWidget(self.video_box)
 
         self.setLayout(mainLayout)
         self.setWindowTitle("Image Search Engine")
@@ -112,6 +134,8 @@ class Window(QWidget):
         #Connecting Buttons to sockets
         self.search_btn.clicked.connect(self.search_image_on_click)
         self.add_img_btn.clicked.connect(self.add_img_btn_on_click)
+        self.reset_btn.clicked.connect(self.reset_btn_on_click)
+        self.create_vid_btn.clicked.connect(self.create_vid_btn_on_click)
 
         #Connecting Combo Boxes to sockets
         self.my_filter_list.currentIndexChanged.connect(self.apply_filter)
@@ -125,8 +149,8 @@ class Window(QWidget):
             self.pic_title.setText("<h2>Please enter search term in text box</h2>")
         else:
             try:
-                picUrl = getimage(line_edit_value,0)
-                qimage = ImageQt(picUrl)
+                currentimage = getimage(line_edit_value,0)
+                qimage = ImageQt(currentimage)
                 pixmap = QtGui.QPixmap.fromImage(qimage)
 
                 self.pic.setPixmap(pixmap)
@@ -135,6 +159,14 @@ class Window(QWidget):
 
     @pyqtSlot()
     def add_img_btn_on_click(self):
+        image_list.append(currentimage)
+
+    @pyqtSlot()
+    def reset_btn_on_click(self):
+        image_list = []
+
+    @pyqtSlot()
+    def create_vid_btn_on_click(self):
         return
 
     @pyqtSlot()
