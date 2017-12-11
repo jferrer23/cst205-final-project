@@ -6,6 +6,7 @@
 #           and applies the functions we created.
 #GitHub Link: https://github.com/jferrer23/cst205-final-project
 
+from rename_images import rename_images
 import os
 from imagesearch import (getimage)
 from PIL import Image
@@ -17,7 +18,6 @@ from PyQt5.QtCore import pyqtSlot
 from PIL.ImageQt import ImageQt
 from pygame import *
 from img_filters import apply_filters
-from rename_images import rename_images
 
 mixer.init()
 
@@ -76,10 +76,12 @@ class Window(QWidget):
         self.my_filter_list = QComboBox()
         self.my_filter_list.addItems(my_list)
         self.add_img_btn = QPushButton("Save All Images", self)
+        self.save_img_btn = QPushButton("Add Images to Video", self)
 
         #Adding resulting image widgets to  resulting image layouts
         filter_add_layout.addWidget(self.my_filter_list)
         filter_add_layout.addWidget(self.add_img_btn)
+        filter_add_layout.addWidget(self.save_img_btn)
         self.filteradd.setLayout(filter_add_layout)
         result_image_layout.addWidget(self.pic_title)
         result_image_layout.addWidget(self.pic)
@@ -140,6 +142,7 @@ class Window(QWidget):
         self.reset_btn.clicked.connect(self.reset_btn_on_click)
         self.create_vid_btn.clicked.connect(self.create_vid_btn_on_click)
         self.add_audio_btn.clicked.connect(self.add_audio_btn_on_click)
+        self.save_img_btn.clicked.connect(self.save_img_btn_on_click)
 
         #Connecting Combo Boxes to sockets
         self.my_filter_list.currentIndexChanged.connect(self.apply_filter)
@@ -175,18 +178,19 @@ class Window(QWidget):
     @pyqtSlot()
     def create_vid_btn_on_click(self):
         video = "slideshow.mp4"
-        cmd = "ffmpeg -i {} -i {} -map 0:0 -map 0:1 -map 1:0 -c:v copy -c:a copy result.mp4".format(video, audio)
+        cmd = "ffmpeg -i {} -i {} -map 0:0 -map 0:1? -map 1:0 -c:v copy -c:a copy result.mp4".format(video, audio)
         os.popen(cmd)
         #print(audio)
 
     #applies the filters to the images and saves the images
     @pyqtSlot()
     def apply_filter(self):
-        imgs = currentimage.save("img_none.png")
+        img1 = currentimage.save("img_none.png")
         img = Image.open("img_none.png")
+
         apply_filters(self.my_filter_list.currentText(), img)
         return
-      
+
     @pyqtSlot()
     def add_audio_btn_on_click(self):
         #Once the Add Audio to Video button is clicked, change the audio variable so that it can be later used
@@ -194,6 +198,12 @@ class Window(QWidget):
         global audio
         audio = music_list[self.audio_dropdown.currentText()]
         print(audio)
+
+    @pyqtSlot()
+    def save_img_btn_on_click(self):
+        cmd = "ffmpeg -r 1 -f image2 -s 1920x1080 -i img%d.png -vcodec libx264 -crf 30  -pix_fmt yuv420p slideshow.mp4"
+
+        os.popen(cmd)
 
 app = QApplication(sys.argv)
 main = Window()
