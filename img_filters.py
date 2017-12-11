@@ -97,7 +97,7 @@ def thumbnail (picture):
 
 
 #to use with combo box in gui
-def image_filters(style, imageUrl):
+def apply_filters(style, imageUrl):
     im = Image.open(imageUrl)
     if style == "None":
         none(im)
