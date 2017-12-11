@@ -5,7 +5,7 @@
 #Abstract: This is the main function file that creates the GUI
 #           and applies the functions we created.
 
-
+import os
 from imagesearch import (getimage)
 from PIL import Image
 import sys
@@ -137,6 +137,7 @@ class Window(QWidget):
         self.add_img_btn.clicked.connect(self.add_img_btn_on_click)
         self.reset_btn.clicked.connect(self.reset_btn_on_click)
         self.create_vid_btn.clicked.connect(self.create_vid_btn_on_click)
+        self.add_audio_butn.clicked.connect(self.add_audio_btn_on_click)
 
         #Connecting Combo Boxes to sockets
         self.my_filter_list.currentIndexChanged.connect(self.apply_filter)
@@ -166,10 +167,13 @@ class Window(QWidget):
     @pyqtSlot()
     def reset_btn_on_click(self):
         image_list = []
+        audio = ""
 
     @pyqtSlot()
     def create_vid_btn_on_click(self):
-        return
+        video = "slideshow.mp4"
+        cmd = "ffmpeg -i {} -i {} -map 0:0 -map 0:1 -map 1:0 -c:v copy -c:a copy result.mp4".format(video, audio)
+        os.popen(cmd)
 
     #applies the filters to the images and saves the images
     @pyqtSlot()
@@ -178,7 +182,13 @@ class Window(QWidget):
         img = Image.open("temp.png")
         apply_filters(self.my_filter_list.currentText(), img)
         return
-
+      
+    @pyqtSlot()
+    def add_audio_btn_on_click(self):
+        #Once the Add Audio to Video button is clicked, change the audio variable so that it can be later used
+        #for the Create Video button
+        audio = music_list[self.audio_dropdown.currentText()]
+        print(audio)
 
 app = QApplication(sys.argv)
 main = Window()
