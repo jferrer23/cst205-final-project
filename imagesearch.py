@@ -1,3 +1,10 @@
+#Author: Jason Ferrer
+#Course: CST205
+#Date: 12/10/2017
+#Title: imagesearch.py
+#Abstract: Function to grab images from API and also grab image based on search term
+#Link to project: https://github.com/jferrer23/cst205-final-project
+
 import requests
 import json
 from random import randint, random
