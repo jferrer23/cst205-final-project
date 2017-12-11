@@ -175,6 +175,7 @@ class Window(QWidget):
         video = "slideshow.mp4"
         cmd = "ffmpeg -i {} -i {} -map 0:0 -map 0:1 -map 1:0 -c:v copy -c:a copy result.mp4".format(video, audio)
         os.popen(cmd)
+        #print(audio)
 
     #applies the filters to the images and saves the images
     @pyqtSlot()
@@ -188,6 +189,7 @@ class Window(QWidget):
     def add_audio_btn_on_click(self):
         #Once the Add Audio to Video button is clicked, change the audio variable so that it can be later used
         #for the Create Video button
+        global audio
         audio = music_list[self.audio_dropdown.currentText()]
         print(audio)
 
