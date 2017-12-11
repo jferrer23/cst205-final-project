@@ -32,12 +32,13 @@ music_list = {
 }
 
 
-#list of image filters for combobox
+#Manjit - list of image filters needed for combobox
 my_list = ["None", "Sharpen", "Blur", "Negative", "Posterize", "Black & White",
            "Solarize", "Thumbnail", "Sepia"]
 
 image_list = []
 
+#Jason - creates the GUI and adds all the buttons and widgets
 class Window(QWidget):
     def __init__(self):
         super().__init__()
@@ -149,7 +150,7 @@ class Window(QWidget):
         self.my_filter_list.currentIndexChanged.connect(self.apply_filter)
 
 
-
+    #Jason - function for the search button to grab images
     @pyqtSlot()
     def search_image_on_click(self):
         line_edit_value = self.my_line_edit.text()
@@ -166,16 +167,19 @@ class Window(QWidget):
             except IndexError:
                 self.pic_title.setText("<h2>No Matching Images</h2>")
 
+     #Manjit - uses the random_images function to rename all images when the add images button is clicked
     @pyqtSlot()
     def add_img_btn_on_click(self):
         rename_images()
         return
-
+      
+    #resets the video
     @pyqtSlot()
     def reset_btn_on_click(self):
         image_list = []
         audio = ""
 
+     #Creates a video from the images
     @pyqtSlot()
     def create_vid_btn_on_click(self):
         #Sean - merges the two files, the video and audio file into one using FFmpeg, a library that converts and merges files together
