@@ -21,6 +21,7 @@ from img_filters import apply_filters
 
 mixer.init()
 
+#Sean --- Create a list of 30 sec audio files to insert into slideshow
 music_list = {
     "None" : "",
     "Jazz" :"jazz.mp3",
@@ -75,8 +76,8 @@ class Window(QWidget):
         self.pic = QLabel(self)
         self.my_filter_list = QComboBox()
         self.my_filter_list.addItems(my_list)
-        self.add_img_btn = QPushButton("Save All Images", self)
-        self.save_img_btn = QPushButton("Add Images to Video", self)
+        self.add_img_btn = QPushButton("Save All Images", self)       
+        self.save_img_btn = QPushButton("Add Images to Video", self)  #--Sean, Manjit, Jason -- add buttons that keep track of the photos being chosen
 
         #Adding resulting image widgets to  resulting image layouts
         filter_add_layout.addWidget(self.my_filter_list)
@@ -96,10 +97,10 @@ class Window(QWidget):
         self.addsound = QWidget()
         self.audio_label = QLabel("Select your audio:")
         self.audio_dropdown = QComboBox()
-        self.audio_dropdown.addItems(music_list)    #insert list of mp3 files into dropdown
-        self.add_audio_btn = QPushButton("Add Audio to Vid", self)
+        self.audio_dropdown.addItems(music_list)    #insert list of mp3 files into dropdown -- Sean
+        self.add_audio_btn = QPushButton("Add Audio to Vid", self) #keeps track of current index of drop down box for correct audio file
 
-        #Adding sound widgets to sound layouts
+        #Adding sound widgets to sound layouts --Sean
         add_music_layout.addWidget(self.audio_dropdown)
         add_music_layout.addWidget(self.add_audio_btn)
         self.addsound.setLayout(add_music_layout)
@@ -141,7 +142,7 @@ class Window(QWidget):
         self.add_img_btn.clicked.connect(self.add_img_btn_on_click)
         self.reset_btn.clicked.connect(self.reset_btn_on_click)
         self.create_vid_btn.clicked.connect(self.create_vid_btn_on_click)
-        self.add_audio_btn.clicked.connect(self.add_audio_btn_on_click)
+        self.add_audio_btn.clicked.connect(self.add_audio_btn_on_click) #SQ -- connect buttons to sockets for audio functions
         self.save_img_btn.clicked.connect(self.save_img_btn_on_click)
 
         #Connecting Combo Boxes to sockets
@@ -177,6 +178,7 @@ class Window(QWidget):
 
     @pyqtSlot()
     def create_vid_btn_on_click(self):
+        #Sean - merges the two files, the video and audio file into one using FFmpeg, a library that converts and merges files together
         video = "slideshow.mp4"
         cmd = "ffmpeg -i {} -i {} -map 0:0 -map 0:1? -map 1:0 -c:v copy -c:a copy result.mp4".format(video, audio)
         os.popen(cmd)
@@ -193,6 +195,7 @@ class Window(QWidget):
 
     @pyqtSlot()
     def add_audio_btn_on_click(self):
+        #Sean - function that keeps track of the correct audio file that is chosen
         #Once the Add Audio to Video button is clicked, change the audio variable so that it can be later used
         #for the Create Video button
         global audio
@@ -201,6 +204,7 @@ class Window(QWidget):
 
     @pyqtSlot()
     def save_img_btn_on_click(self):
+        #Sean - uses ffmpeg to cycle through the renamed image files to create a slideshow from those pictures
         cmd = "ffmpeg -r 1 -f image2 -s 1920x1080 -i img%d.png -vcodec libx264 -crf 30  -pix_fmt yuv420p slideshow.mp4"
 
         os.popen(cmd)
