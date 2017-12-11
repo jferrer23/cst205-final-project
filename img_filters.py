@@ -123,7 +123,7 @@ def apply_filters(style, image):
     if style == "Sharpen":
         sharpen(image)
     if style == "Blur":
-        blue(image)
+        blur(image)
     if style == "Negative":
         negative(image)
     if style == "Posterize":
