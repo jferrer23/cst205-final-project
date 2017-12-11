@@ -25,7 +25,10 @@ music_list = {
     "Drops of Jupiter" : "train.mp3",
     "Somewhere Over the Rainbow" : "rainbow.mp3"
 }
-my_list = ["none","sepia","grayscale","negative","thumbnail"]
+
+#list of image filters for combobox
+my_list = ["None", "Sharpen", "Blur", "Negative", "Posterize", "Black & White",
+          "Solarize", "Thumbnail", "Sepia"]
 
 class Window(QWidget):
     def __init__(self):
