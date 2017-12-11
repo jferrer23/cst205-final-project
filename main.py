@@ -179,8 +179,8 @@ class Window(QWidget):
     #applies the filters to the images and saves the images
     @pyqtSlot()
     def apply_filter(self):
-        img1 = currentimage.save("temp.png")
-        img = Image.open("temp.png")
+        img1 = currentimage.save("img1.png")
+        img = Image.open("img1.png")
         apply_filters(self.my_filter_list.currentText(), img)
         return
       
