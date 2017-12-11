@@ -1,12 +1,13 @@
-## Created by: Jason Ferrer
-## Date: 10/9/2017
-## CST205- Multimedia Design & Programming
-## Description: This piece of code creates the GUI of an Enhanced Image Search Engine.
-## It has a search box in which one can enter key words and when the search button
-## is pressed, a corresponding picture is displayed if available. A filter drop box
-## also exists with which one can apply on the image displayed.
+#Course: CST205
+#Title: main.py
+#Authors: Jason Ferrer, Sean Quevedo, Manjit Gurcha
+#Date: 12/10/2017
+#Abstract: This is the main function file that creates the GUI
+#           and applies the functions we created.
+
 
 from imagesearch import (getimage)
+from PIL import Image
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
@@ -150,6 +151,7 @@ class Window(QWidget):
             self.pic_title.setText("<h2>Please enter search term in text box</h2>")
         else:
             try:
+                global currentimage
                 currentimage = getimage(line_edit_value,0)
                 qimage = ImageQt(currentimage)
                 pixmap = QtGui.QPixmap.fromImage(qimage)
@@ -170,9 +172,12 @@ class Window(QWidget):
     def create_vid_btn_on_click(self):
         return
 
+    #applies the filters to the images and saves the images
     @pyqtSlot()
     def apply_filter(self):
-        apply_filters(self.my_filter_list.currentText(), currentImage)
+        img1 = currentimage.save("temp.png")
+        img = Image.open("temp.png")
+        apply_filters(self.my_filter_list.currentText(), img)
         return
 
 
