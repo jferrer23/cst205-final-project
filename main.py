@@ -17,6 +17,7 @@ from PyQt5.QtCore import pyqtSlot
 from PIL.ImageQt import ImageQt
 from pygame import *
 from img_filters import apply_filters
+from rename_images import rename_images
 
 mixer.init()
 
@@ -74,7 +75,7 @@ class Window(QWidget):
         self.pic = QLabel(self)
         self.my_filter_list = QComboBox()
         self.my_filter_list.addItems(my_list)
-        self.add_img_btn = QPushButton("Add Pic to Vid", self)
+        self.add_img_btn = QPushButton("Save All Images", self)
 
         #Adding resulting image widgets to  resulting image layouts
         filter_add_layout.addWidget(self.my_filter_list)
@@ -163,7 +164,8 @@ class Window(QWidget):
 
     @pyqtSlot()
     def add_img_btn_on_click(self):
-        image_list.append(currentimage)
+        rename_images()
+        return
 
     @pyqtSlot()
     def reset_btn_on_click(self):
