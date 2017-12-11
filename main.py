@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton,
 from PyQt5.QtCore import pyqtSlot
 from PIL.ImageQt import ImageQt
 from pygame import *
-import img_filters 
+from img_filters import apply_filters
 
 mixer.init()
 
