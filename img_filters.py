@@ -10,35 +10,50 @@ from PIL import Image, ImageFilter, ImageOps
 #no filter
 def none (picture):
     picture.save("img1.png")
+    img = Image.open("img1.png")
+    img.resize((600,600)).save("img1.png")
 
 #posterize image
 def posterize(picture):
     picture = ImageOps.posterize(picture, 1)
     picture.save("img2.png")
+    img = Image.open("img2.png")
+    img.resize((600,600)).save("img2.png")
 
 def solarize(picture):
     picture = ImageOps.solarize(picture)
     picture.save("img3.png")
+    img = Image.open("img3.png")
+    img.resize((600,600)).save("img3.png")
 
 #sharpen image
 def sharpen(picture):
     picture = picture.filter(ImageFilter.EDGE_ENHANCE)
     picture.save("img4.png")
+    img = Image.open("img4.png")
+    img.resize((600,600)).save("img4.png")
+    
 
 #convert to black & white
 def black_white(picture):
     picture = picture.convert("1")
     picture.save("img5.png")
+    img = Image.open("img5.png")
+    img.resize((600,600)).save("img5.png")
 
 #blur image
 def blur(picture):
     picture = picture.filter(ImageFilter.BLUR)
     picture.save("img6.png")
+    img = Image.open("img6.png")
+    img.resize((600,600)).save("img6.png")
 
 #negative image
 def negative(picture):
     picture = ImageOps.invert(picture)
     picture.save("img7.png")
+    img = Image.open("img7.png")
+    img.resize((600,600)).save("img7.png")
 
 #temporary for sepia
 def temp_grayscale(picture):
@@ -82,6 +97,8 @@ def sepia(picture):
         temp_list.append((red_val, green_val, blue_val))
     picture.putdata(temp_list)
     picture.save("img8.png")
+    img = Image.open("img8.png")
+    img.resize((600,600)).save("img8.png")
 
 #Thumbnail
 def thumbnail (picture):
@@ -95,6 +112,8 @@ def thumbnail (picture):
             target_y += 1
         target_x += 1
     canvas.save("img9.png")
+    img = Image.open("img9.png")
+    img.resize((600,600)).save("img9.png")
 
 
 #to use with combo box in gui
